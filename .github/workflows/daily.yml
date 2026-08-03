@@ -1,31 +1,43 @@
-name: Daily Scraper Trigger
+name: Daily Job Scraper
 
 on:
   schedule:
-    # Her gün Türkiye saatiyle 09:00'da çalışır (UTC 06:00)
-    - cron: '0 6 * * *'
-  workflow_dispatch: # İstediğinde GitHub sitesinden "Run" butonuna basıp elle tetiklemek için
+    # Her gün Polonya/Türkiye saatiyle 09:00'da çalışır (UTC saati 07:00'ye denk gelir)
+    - cron: '0 7 * * *'
+  workflow_dispatch: # GitHub arayüzündeki "Run workflow" butonuyla elle çalıştırmak için
 
 jobs:
-  run-script:
+  run-bot:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Kodları Çek
+      - name: Repodaki Dosyaları Çek
         uses: actions/checkout@v3
 
-      - name: Python Ortamını Kur
+      - name: Python 3.10 Kur
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Kütüphaneleri Yükle
+      - name: Bağımlılıkları Yükle
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Ana Kodu Çalıştır
+      # Eğer Selenium / Playwright kullanıyorsan aşağıdaki yorum satırını kaldır:
+      # - name: Install Playwright/Browsers
+      #   run: npx playwright install --with-deps
+
+      - name: Botu Çalıştır (main.py)
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python main.py # <-- Buraya senin ANA dosyanın adı neyse onu yazacaksın
+        run: python main.py
+
+      - name: Güncellenmiş seen_jobs.json Dosyasını Repoya Geri Kaydet
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add seen_jobs.json
+          git commit -m "Auto-update seen_jobs.json [skip ci]" || exit 0
+          git push
