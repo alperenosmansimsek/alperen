@@ -41,3 +41,7 @@ jobs:
           git add seen_jobs.json
           git commit -m "Auto-update seen_jobs.json [skip ci]" || exit 0
           git push
+
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
