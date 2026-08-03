@@ -25,9 +25,16 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       # Eğer Selenium / Playwright kullanıyorsan aşağıdaki yorum satırını kaldır:
-      # - name: Install Playwright/Browsers
-      #   run: npx playwright install --with-deps
+       - name: Install Playwright/Browsers
+         run: npx playwright install --with-deps
+      
+        - name: Install Playwright Browsers
+         run: playwright install --with-deps chromium
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+        
       - name: Botu Çalıştır (main.py)
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
@@ -42,6 +49,3 @@ jobs:
           git commit -m "Auto-update seen_jobs.json [skip ci]" || exit 0
           git push
 
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
