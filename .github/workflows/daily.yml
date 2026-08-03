@@ -1,7 +1,9 @@
 name: Daily Job Scraper
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Bunu elle test etmek için tutabilirsin
+  schedule:
+    - cron: '0 6 * * *'  # UTC saatine göre 06:00 (Türkiye saati ile sabah 09:00)
 
 jobs:
   run-bot:
