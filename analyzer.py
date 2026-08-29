@@ -57,9 +57,9 @@ class JobAnalyzer:
         matches = []
         matched_roles = []
 
-        # 1. Hedef Rol Eşleşmeleri (+20 Puan)
+        # 1. Hedef Rol Eşleşmeleri (+10 Puan)
         target_roles = [
-            "compliance", "risk", "analyst", "operations", "operations analyst", 
+            "compliance", "risk", "analyst", "operations", "data", "operations analyst", 
             "process improvement", "qa automation", "test automation", 
             "turkish", "data analyst", "business analyst", "software engineer", 
             "android developer", "kotlin developer", "python developer", "junior developer"
@@ -67,7 +67,7 @@ class JobAnalyzer:
         
         for r in target_roles:
             if r in title.lower():
-                score += 20
+                score += 10
                 matched_roles.append(r.title())
                 break
 
@@ -75,8 +75,6 @@ class JobAnalyzer:
         tech_stack = {
             "python": "Python Automation",
             "kotlin": "Kotlin / Android",
-            "aws": "AWS Cloud",
-            "sql": "SQL Database",
             "javascript": "JavaScript / Extension",
             "excel": "Advanced Excel & Macros",
             "turkish": "Native Turkish",
@@ -94,7 +92,7 @@ class JobAnalyzer:
         if any(s in title.lower() for s in [ "lead", "head of", "director", "manager"]):
             score -= 5
         elif any(j in title.lower() for j in ["senior", "junior", "associate", "specialist", "analyst"]):
-            score += 10
+            score += 5
 
         score = max(0, min(score, 98))
 
