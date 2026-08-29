@@ -1,4 +1,3 @@
-# scraper.py
 import re
 import time
 import random
@@ -38,7 +37,6 @@ def _clean_text(raw: str, limit: int = 3000) -> str:
     return text[:limit]
 
 def _handle_modals(page):
-    """Pop-up, reklam ve cookie onaylarını kapatır."""
     modal_selectors = [
         "button[class*='close']", "[data-test='button-close']", 
         "div[class*='popup'] button", "button:has-text('✕')", "button:has-text('X')",
@@ -74,103 +72,121 @@ def _extract_page_text(page) -> str:
     except Exception:
         return ""
 
-
 class JobScraper:
     def __init__(self):
         self.seen_jobs = _load_seen_jobs()
-        # SİTEYE ÖZEL İLAN KART/DIV SELECTOR YAPISI
         self.target_sites = [
-            # Pracuj.pl
-            {"site": "Pracuj.pl - Analyst", "type": "generic", "url": "https://www.pracuj.pl/praca/analyst;kw/warszawa;wp?rd=30&et=1%2C17%2C4%2C18&wpl=true", "card_selector": "[data-test='default-offer'], [data-test='offer-title'], a[href*='/praca/']"},
-            {"site": "Pracuj.pl - Compliance", "type": "generic", "url": "https://www.pracuj.pl/praca/compliance;kw/warszawa;wp?rd=30&et=1%2C17%2C4%2C18&wpl=true", "card_selector": "[data-test='default-offer'], [data-test='offer-title'], a[href*='/praca/']"},
-            {"site": "Pracuj.pl - Risk", "type": "generic", "url": "https://www.pracuj.pl/praca/risk;kw/warszawa;wp?rd=30&et=1%2C17%2C4%2C18&wpl=true", "card_selector": "[data-test='default-offer'], [data-test='offer-title'], a[href*='/praca/']"},
-            {"site": "Pracuj.pl - Operations", "type": "generic", "url": "https://www.pracuj.pl/praca/operations;kw/warszawa;wp?rd=30&et=1%2C17%2C4%2C18&wpl=true", "card_selector": "[data-test='default-offer'], [data-test='offer-title'], a[href*='/praca/']"},
-            {"site": "Pracuj.pl - Turkish", "type": "generic", "url": "https://www.pracuj.pl/praca/turkish;kw/warszawa;wp?rd=30&et=1%2C17%2C4%2C18&wpl=true", "card_selector": "[data-test='default-offer'], [data-test='offer-title'], a[href*='/praca/']"},
+            # 📌 Pracuj.pl (Son 7 Gün & Junior/Mid/Staż Filtresi)
+            {"site": "Pracuj.pl - Analyst", "type": "pracuj", "url": "https://www.pracuj.pl/praca/analyst;kw/warszawa;wp/ostatnich%207%20dni;p,7?rd=10&et=1%2C17%2C4%2C18%2C3%2C19%2C5%2C20%2C6%2C21%2C2&wpl=true&tm=7", "card_selector": "div[data-test='default-offer'] a[data-test='link-offer'], a[href*='oferta']"},
+            {"site": "Pracuj.pl - Compliance", "type": "pracuj", "url": "https://www.pracuj.pl/praca/compliance;kw/warszawa;wp/ostatnich%207%20dni;p,7?rd=10&et=1%2C17%2C4%2C18%2C3%2C19%2C5%2C20%2C6&wpl=true&tm=7", "card_selector": "div[data-test='default-offer'] a[data-test='link-offer'], a[href*='oferta']"},
+            {"site": "Pracuj.pl - Risk", "type": "pracuj", "url": "https://www.pracuj.pl/praca/risk;kw/warszawa;wp/ostatnich%207%20dni;p,7?rd=10&et=1%2C17%2C4%2C18%2C3%2C19%2C5%2C20%2C6%2C21&wpl=true&tm=7", "card_selector": "div[data-test='default-offer'] a[data-test='link-offer'], a[href*='oferta']"},
+            {"site": "Pracuj.pl - Operations", "type": "pracuj", "url": "https://www.pracuj.pl/praca/operations;kw/warszawa;wp/ostatnich%207%20dni;p,7?rd=10&et=1%2C17%2C4%2C18%2C3%2C19%2C5%2C20%2C6&wpl=true&tm=7", "card_selector": "div[data-test='default-offer'] a[data-test='link-offer'], a[href*='oferta']"},
+            {"site": "Pracuj.pl - Turkish", "type": "pracuj", "url": "https://www.pracuj.pl/praca/turkish;kw/warszawa;wp/ostatnich%207%20dni;p,7?rd=10&tm=7", "card_selector": "div[data-test='default-offer'] a[data-test='link-offer'], a[href*='oferta']"},
+            
+            # 📌 RocketJobs (Site yapısı gereği tarih filtresi varsayılan olarak taze ilanları üstte verir)
+            {"site": "RocketJobs - Analyst", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?radius=10&typ-umowy=umowa-o-prace&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior,starszy-specjalista-senior,kierownik-manager&keyword=analyst&data-publikacji=14&jezyk=en", "card_selector": "a[href^='/oferta/'], a[href*='/oferty-pracy/']"},
+            {"site": "RocketJobs - Compliance EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?radius=10&typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior,starszy-specjalista-senior,dyrektor-c-level,kierownik-manager&keyword=compliance&data-publikacji=14&jezyk=en#more-filters", "card_selector": "a[href^='/oferta/'], a[href*='/oferty-pracy/']"},
+            {"site": "RocketJobs - Risk EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?radius=10&typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior,kierownik-manager,starszy-specjalista-senior,dyrektor-c-level&keyword=risk&data-publikacji=14&jezyk=en", "card_selector": "a[href^='/oferta/'], a[href*='/oferty-pracy/']"},
+            {"site": "RocketJobs - Operations EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?radius=10&typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior,kierownik-manager,starszy-specjalista-senior,dyrektor-c-level&keyword=operations&data-publikacji=14&jezyk=en#more-filters", "card_selector": "a[href^='/oferta/'], a[href*='/oferty-pracy/']"},
+            {"site": "RocketJobs - Turkish EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?radius=10&typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior,starszy-specjalista-senior,kierownik-manager,dyrektor-c-level&keyword=turkish&jezyk=en#more-filters", "card_selector": "a[href^='/oferta/'], a[href*='/oferty-pracy/']"},
+            
+            # 📌 JustJoin.it
+            {"site": "JustJoin.it - Junior/Mid", "type": "generic", "url": "https://justjoin.it/job-offers/warszawa?radius=10&employment-types=permanent&working-times=full-time&experience-levels=junior,mid,team-leader-manager,senior,c-level&published-date=7&languages=en&sortBy=newest", "card_selector": "a[href*='/job-offer/'], a[href*='/offers/']"},
 
-            # RocketJobs
-            {"site": "RocketJobs - Analyst EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior&keyword=analyst&jezyk=en", "card_selector": "a[href*='/oferty-pracy/']"},
-            {"site": "RocketJobs - Compliance EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior&keyword=compliance&jezyk=en", "card_selector": "a[href*='/oferty-pracy/']"},
-            {"site": "RocketJobs - Operations EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior&keyword=operations&jezyk=en", "card_selector": "a[href*='/oferty-pracy/']"},
-            {"site": "RocketJobs - Turkish EN", "type": "generic", "url": "https://rocketjobs.pl/oferty-pracy/warszawa?typ-umowy=umowa-o-prace&rodzaj-pracy=pelny-etat&doswiadczenie=specjalista-mid,mlodszy-specjalista-junior&keyword=turkish&jezyk=en", "card_selector": "a[href*='/oferty-pracy/']"},
+            # 📌 JobLeads (Zaten 7 Gün ayarlı: filter_by_daysReleased=7)
+            {"site": "JobLeads - Compliance", "type": "generic", "url": "https://www.jobleads.com/pl/jobs/l/Warszawa/q/compliance?filter_by_daysReleased=7&minSalary=100000", "card_selector": "a[href*='/job/']"},
+            {"site": "JobLeads - Turkish", "type": "generic", "url": "https://www.jobleads.com/pl/jobs/l/Warszawa/q/turkish?filter_by_daysReleased=7&minSalary=100000", "card_selector": "a[href*='/job/']"},
+            {"site": "JobLeads - Tax", "type": "generic", "url": "https://www.jobleads.com/pl/jobs/l/Warszawa/q/tax?filter_by_daysReleased=7&minSalary=100000", "card_selector": "a[href*='/job/']"},
+            {"site": "JobLeads - Accountant", "type": "generic", "url": "https://www.jobleads.com/pl/jobs/l/Warszawa/q/accountant?filter_by_daysReleased=7&minSalary=100000", "card_selector": "a[href*='/job/']"},
 
-            # JustJoin.it
-            {"site": "JustJoin.it - Junior", "type": "generic", "url": "https://justjoin.it/job-offers/warszawa?experience-level=junior&workplace=hybrid%2Cremote&working-hours=full-time&keyword=junior&orderBy=DESC&sortBy=newest", "card_selector": "a[href*='/job-offer/'], a[href*='/offers/']"},
-
-            # XpatJobs
-            {"site": "XpatJobs - Compliance", "type": "generic", "url": "https://poland.xpatjobs.com/search?ps=1&keyword=compliance&city=warsaw&areas=28", "card_selector": "a[href*='/job/'], a[href*='/vacancy/']"},
-            {"site": "XpatJobs - Turkish", "type": "generic", "url": "https://poland.xpatjobs.com/search?ps=1&keyword=turkish&city=warsaw&areas=28", "card_selector": "a[href*='/job/'], a[href*='/vacancy/']"},
-
-            # CareersInPoland
-            {"site": "CareersInPoland", "type": "generic", "url": "https://www.careersinpoland.com/jobs/language/english+turkish/city/remote+warszawa", "card_selector": "a[href*='/job/'], a[href*='/jobs/']"},
-
-            # JobLeads
-            {"site": "JobLeads - Compliance", "type": "generic", "url": "https://www.jobleads.com/pl/jobs/l/Warszawa/q/compliance?filter_by_daysReleased=14&filter_by_remote=hybrid,remote&minSalary=120000", "card_selector": "a[href*='/job/']"},
-            {"site": "JobLeads - Turkish", "type": "generic", "url": "https://www.jobleads.com/pl/jobs/l/Warszawa/q/turkish?filter_by_daysReleased=14&filter_by_remote=hybrid,remote&minSalary=120000", "card_selector": "a[href*='/job/']"},
-
-            # Talent.com
-            {"site": "Talent.com - Compliance", "type": "generic", "url": "https://pl.talent.com/en/jobs?k=compliance&l=Warsaw%2C+Mazovia&radius=5", "card_selector": "a[href*='/view']"},
-            {"site": "Talent.com - Turkish", "type": "generic", "url": "https://pl.talent.com/en/jobs?k=turkish&l=Warsaw%2C+Mazovia&radius=5", "card_selector": "a[href*='/view']"},
-
-            # Indeed
-            {"site": "Indeed - Compliance", "type": "generic", "url": "https://pl.indeed.com/jobs?q=compliance&l=Warszawa%2C%20mazowieckie&radius=10&from=searchOnDesktopSerp", "card_selector": "a[id^='job_'], a[class*='jcs-JobTitle']"},
-            {"site": "Indeed - Turkish", "type": "generic", "url": "https://pl.indeed.com/jobs?q=turkish&l=Warszawa%2C%20mazowieckie&radius=10&from=searchOnDesktopSerp", "card_selector": "a[id^='job_'], a[class*='jcs-JobTitle']"},
-
-            # LinkedIn Guest (Çoklu Sayfa)
-            {"site": "LinkedIn - Analyst", "type": "linkedin_guest", "keywords": "Analyst", "f_E": "1,2", "f_WT": "2,3,1"},
-            {"site": "LinkedIn - Compliance", "type": "linkedin_guest", "keywords": "Compliance", "f_E": "1,2", "f_WT": "2,3,1"},
-            {"site": "LinkedIn - Risk", "type": "linkedin_guest", "keywords": "risk", "f_E": "1,2", "f_WT": "2,3,1"},
-            {"site": "LinkedIn - Operations", "type": "linkedin_guest", "keywords": "Operations", "f_E": "1,2", "f_WT": "2,3,1"},
-            {"site": "LinkedIn - Turkish", "type": "linkedin_guest", "keywords": "turkish", "f_E": "1,2", "f_WT": "2,3,1"},
+            # 📌 Indeed (Son 7 Gün: &fromage=7)
+            {"site": "Indeed - Compliance", "type": "generic", "url": "https://pl.indeed.com/jobs?q=compliance&l=Warszawa&fromage=7&lang=en&radius=10&sc=0kf%3Aattr%285QWDV%7CCF3CP%252COR%29%3B&from=searchOnDesktopSerp&vjk=0444a2df8dccf399", "card_selector": "a[id^='job_'], a[class*='jcs-JobTitle']"},
+            {"site": "Indeed - Turkish", "type": "generic", "url": "https://pl.indeed.com/jobs?q=turkish&l=Warszawa&fromage=7", "card_selector": "a[id^='job_'], a[class*='jcs-JobTitle']"},
+            {"site": "Indeed -  - ", "type": "generic", "url": "https://pl.indeed.com/jobs?q=&l=Warszawa&sort=date&fromage=7&lang=en&radius=25&sc=0kf%3Aattr%285QWDV%7CCF3CP%252COR%29%3B&from=searchOnDesktopSerp", "card_selector": "a[id^='job_'], a[class*='jcs-JobTitle']"},
+            
+            # 📌 LinkedIn Guest (Son 7 Gün: f_TPR=r604800)
+            {"site": "LinkedIn - Analyst", "type": "linkedin_guest", "keywords": "Analyst", "f_E": "1,2,3", "f_WT": "2,3,1", "f_TPR": "r604800"},
+            {"site": "LinkedIn - Compliance", "type": "linkedin_guest", "keywords": "Compliance", "f_E": "1,2,3", "f_WT": "2,3,1", "f_TPR": "r604800"},
+            {"site": "LinkedIn - Risk", "type": "linkedin_guest", "keywords": "Risk", "f_E": "1,2,3", "f_WT": "2,3,1", "f_TPR": "r604800"},
+            {"site": "LinkedIn - Operations", "type": "linkedin_guest", "keywords": "Operations", "f_E": "1,2,3", "f_WT": "2,3,1", "f_TPR": "r604800"},
+            {"site": "LinkedIn - Turkish", "type": "linkedin_guest", "keywords": "Turkish", "f_E": "1,2,3", "f_WT": "2,3,1", "f_TPR": "r604800"},
         ]
 
     def _scrape_generic(self, context, target: dict) -> list:
         site_name = target["site"]
+        base_url = target["url"]
         jobs = []
+        local_seen = set()
+        candidates = []
+
         page = context.new_page()
         try:
-            try:
-                page.goto(target["url"], timeout=15000, wait_until="domcontentloaded")
-            except Exception:
-                pass
+            page_idx = 1
+            max_pages = 5
+            empty_pages_count = 0
 
-            time.sleep(1.5)
-            _handle_modals(page)
+            while page_idx <= max_pages:
+                page_url = base_url
+                if "pracuj.pl" in base_url:
+                    sep = "&" if "?" in base_url else "?"
+                    page_url = f"{base_url}{sep}pn={page_idx}"
 
-            # DERİN AŞAĞI KAYDIRMA (Scroll & Dinamik Yükleme)
-            for _ in range(5):
-                page.mouse.wheel(0, 2500)
-                time.sleep(0.7)
-
-            base = "/".join(target["url"].split("/")[:3])
-            candidates = []
-            local_seen = set()
-
-            # Inspect Elemanı Mantığıyla İlan Kartlarını Çek
-            card_sel = target.get("card_selector", "a")
-            elements = page.locator(card_sel).all()
-
-            for el in elements:
                 try:
-                    href = el.get_attribute("href")
-                    title = el.inner_text().strip()
-                    if not href:
-                        continue
-
-                    full_url = base + href if href.startswith("/") else href
-
-                    if full_url in self.seen_jobs or full_url in local_seen or full_url == target["url"]:
-                        continue
-
-                    local_seen.add(full_url)
-                    clean_title = title if len(title) > 3 else "Job Opportunity"
-                    candidates.append({"url": full_url, "title": clean_title})
+                    page.goto(page_url, timeout=20000, wait_until="domcontentloaded")
                 except Exception:
-                    continue
+                    pass
+
+                time.sleep(1.5)
+                _handle_modals(page)
+
+                for _ in range(4):
+                    page.mouse.wheel(0, 1500)
+                    time.sleep(0.3)
+
+                card_sel = target.get("card_selector", "a")
+                elements = page.locator(card_sel).all()
+                base_domain = "/".join(page_url.split("/")[:3])
+
+                page_new_found = 0
+                for el in elements:
+                    try:
+                        href = el.get_attribute("href")
+                        title = el.inner_text().strip()
+                        if not href:
+                            continue
+
+                        full_url = base_domain + href if href.startswith("/") else href
+                        clean_url = full_url.split("?")[0]
+
+                        # Çöp kategori linklerini ele
+                        if any(c in clean_url for c in ["/kategorie/", "/sprzedaz", "/marketing", "/budownictwo", "/edukacja"]):
+                            continue
+
+                        if (clean_url in self.seen_jobs or 
+                            clean_url in local_seen or 
+                            clean_url == page_url or 
+                            len(clean_url) < 18):
+                            continue
+
+                        local_seen.add(clean_url)
+                        clean_title = title.split("\n")[0].strip() if title else "Job Opportunity"
+                        candidates.append({"url": full_url, "title": clean_title})
+                        page_new_found += 1
+                    except Exception:
+                        continue
+
+                if page_new_found == 0:
+                    empty_pages_count += 1
+                    if empty_pages_count >= 2:
+                        break
+                else:
+                    empty_pages_count = 0
+
+                page_idx += 1
 
             candidates = candidates[:MAX_JOBS_PER_SITE]
             print(f"   --> {site_name}: {len(candidates)} adet YENİ ilan kartı yakalandı.")
 
-            # Her ilanı sanki yan sekmede açıyormuş gibi okuma
             for cand in candidates:
                 detail_page = context.new_page()
                 try:
@@ -208,13 +224,13 @@ class JobScraper:
         site_name = target["site"]
         jobs = []
         headers = {"User-Agent": USER_AGENT}
+        tpr = target.get("f_TPR", "r604800")
 
-        # Sayfa Sayfa (0, 25, 50, 75 offset) Gezerek İlan Toplama
         for start_offset in range(0, 100, 25):
             search_url = (
                 "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
                 f"?keywords={target['keywords']}&location=Warsaw%2C%20Poland"
-                f"&f_E={target['f_E']}&f_WT={target['f_WT']}&start={start_offset}"
+                f"&f_E={target['f_E']}&f_WT={target['f_WT']}&f_TPR={tpr}&start={start_offset}"
             )
             try:
                 res = requests.get(search_url, headers=headers, timeout=20)
@@ -261,7 +277,8 @@ class JobScraper:
                         "url": job_url,
                         "description": description,
                     })
-                    _sleep()
+
+                _sleep()
 
             except Exception as e:
                 print(f"   ⚠️ {site_name} (guest) sayfa offset {start_offset} hatası: {e}")
