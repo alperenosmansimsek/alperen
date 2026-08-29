@@ -1,4 +1,4 @@
 groq
-requests
 playwright
- 
+requests
+python-dotenv
