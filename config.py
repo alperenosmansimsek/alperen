@@ -13,7 +13,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "1421665735")
 # ==========================================
 # ⚙️ FILTERING & PIPELINE PARAMETERS
 # ==========================================
-MIN_MATCH_SCORE = 70       # Minimum uyum puanı (0-100)
+MIN_MATCH_SCORE = 80       # Minimum uyum puanı (0-100)
 REQUEST_DELAY = (0.8, 2.0) # İstekler arası bekleme süresi
 
 # ==========================================
