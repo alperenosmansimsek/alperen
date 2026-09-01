@@ -20,7 +20,7 @@ REQUEST_DELAY = (0.8, 2.0) # İstekler arası bekleme süresi
 # 🏢 FİRMA AYARLARI
 # ==========================================
 BLACK_LIST_COMPANIES = []
-REFERRAL_COMPANIES = ["ecovadis", "accenture", "amazon", "google", "standard chartered"]
+REFERRAL_COMPANIES = []
 
 # ==========================================
 # 🚫 LEHÇE ŞARTI ANAHTAR KELİMELERİ
