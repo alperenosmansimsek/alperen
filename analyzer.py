@@ -57,7 +57,7 @@ class JobAnalyzer:
         matches = []
         matched_roles = []
 
-        # 1. Hedef Rol Eşleşmeleri (+10 Puan)
+        # 1. Hedef Rol Eşleşmeleri (+20 Puan)
         target_roles = [
             "compliance", "risk", "analyst", "operations", "data", "operations analyst", 
             "process improvement", "qa automation", "test automation", 
@@ -67,11 +67,11 @@ class JobAnalyzer:
         
         for r in target_roles:
             if r in title.lower():
-                score += 10
+                score += 20
                 matched_roles.append(r.title())
                 break
 
-        # 2. Yetkinlik ve Teknoloji Eşleşmeleri (+5 her biri)
+        # 2. Yetkinlik ve Teknoloji Eşleşmeleri (+10 her biri)
         tech_stack = {
             "python": "Python Automation",
             "kotlin": "Kotlin / Android",
@@ -85,7 +85,7 @@ class JobAnalyzer:
 
         for k, label in tech_stack.items():
             if re.search(rf'\b{k}\b', combined_text):
-                score += 5
+                score += 10
                 matches.append(label)
 
         # 3. Kıdem Seviyesi Kontrolü
