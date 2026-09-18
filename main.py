@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import time
 from scraper import JobScraper
 from analyzer import JobAnalyzer
@@ -8,19 +9,43 @@ from config import MIN_MATCH_SCORE
 
 SEEN_JOBS_FILE = "seen_jobs.json"
 
+def normalize_text(text: str) -> str:
+    """Metindeki özel karakterleri temizler ve küçük harfe çevirir."""
+    if not text:
+        return ""
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9]', '', text)
+    return text
+
+def generate_job_fingerprint(job: dict) -> str:
+    """Firma adı ve pozisyon başlığını birleştirip tekil kimlik üretir."""
+    comp = normalize_text(job.get("company", ""))
+    title = normalize_text(job.get("title", ""))
+    
+    # Firma ismi link içeriğindeyse veya boşsa URL'yi baz al
+    if not comp or comp in ["seelink", "seejoblink", "unknown"]:
+        return normalize_text(job.get("url", ""))
+    return f"fp_{comp}_{title}"
+
 def load_seen_jobs() -> set:
     if os.path.exists(SEEN_JOBS_FILE):
         try:
             with open(SEEN_JOBS_FILE, "r", encoding="utf-8") as f:
-                return set(json.load(f))
+                data = json.load(f)
+                return set(data)
         except Exception:
             return set()
     return set()
 
 def save_seen_jobs(seen_jobs: set):
     try:
+        # Liste boyutu 5000'i geçerse en eski kayıtları kırpıp korur
+        cleaned_list = list(seen_jobs)
+        if len(cleaned_list) > 5000:
+            cleaned_list = cleaned_list[-4000:]
+
         with open(SEEN_JOBS_FILE, "w", encoding="utf-8") as f:
-            json.dump(list(seen_jobs), f, indent=2, ensure_ascii=False)
+            json.dump(cleaned_list, f, indent=2, ensure_ascii=False)
     except Exception as e:
         print(f"⚠️ seen_jobs kaydedilirken hata: {e}")
 
@@ -51,9 +76,11 @@ def run_pipeline():
 
         for idx, job in enumerate(jobs, 1):
             job_id = job.get("id") or job.get("url")
+            job_fp = generate_job_fingerprint(job)
 
-            if job_id in seen_jobs:
-                print(f"   [{idx}/{len(jobs)}] Zaten incelendi, geçiliyor: {job.get('title', 'Unknown')}")
+            # Hem link hem de Firma + Pozisyon kontrol edilir
+            if job_id in seen_jobs or job_fp in seen_jobs:
+                print(f"   [{idx}/{len(jobs)}] Zaten gönderilmiş/incelenmiş, geçiliyor: {job.get('title', 'Unknown')} @ {job.get('company', 'Unknown')}")
                 continue
 
             print(f"\n🧠 Analiz Ediliyor [{idx}/{len(jobs)}]: {job.get('title')} @ {job.get('company')}")
@@ -73,7 +100,9 @@ def run_pipeline():
                     print(f"   ⚠️ Telegram bildirimi gönderilemedi: {e}")
                 time.sleep(1.0)
 
+            # Hem URL'yi hem de parmak izini kaydet
             seen_jobs.add(job_id)
+            seen_jobs.add(job_fp)
             save_seen_jobs(seen_jobs)
 
         print(f"\n✅ {site_name} SİTESİNDEKİ TÜM İLANLARIN ANALİZİ TAMAMLANDI!")
