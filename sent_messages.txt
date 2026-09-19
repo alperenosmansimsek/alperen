@@ -1,0 +1,405 @@
+----------------------------------------
+Role: Tier III Service Desk Engineer
+Company: Unio Digital
+Match Score: %80
+URL: https://remotive.com/remote-jobs/information-technology/tier-iii-service-desk-engineer-2091045
+----------------------------------------
+
+----------------------------------------
+Role: Python Developer (m/f/d)
+Company: See Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/python-developer-m-f-d-at-ithouse-co-4385500765
+----------------------------------------
+
+----------------------------------------
+Role: React/Node Developer
+Company: See Job Link
+Match Score: %80
+URL: https://www.pracuj.pl/praca/react-node-developer-warszawa,oferta,1004974208
+----------------------------------------
+
+----------------------------------------
+Role: Generalist Programmer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/generalist-programmer-at-qloc-4437831059
+----------------------------------------
+
+----------------------------------------
+Role: Engine Programmer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/engine-programmer-at-larian-studios-4331093018
+----------------------------------------
+
+----------------------------------------
+Role: Fullstack Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/fullstack-engineer-at-ringier-axel-springer-tech-4438645598
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-virtuos-4441580754
+----------------------------------------
+
+----------------------------------------
+Role: Smallworld Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/smallworld-developer-at-rublon-3703082513
+----------------------------------------
+
+----------------------------------------
+Role: Backend Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/backend-engineer-at-beyond-tabs-com-4443505787
+----------------------------------------
+
+----------------------------------------
+Role: Fullstack Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/fullstack-developer-at-sportradar-4436305728
+----------------------------------------
+
+----------------------------------------
+Role: Software Development Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-development-engineer-at-stratslab-4399263180
+----------------------------------------
+
+----------------------------------------
+Role: ASP.NET Core Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/asp-net-core-developer-at-codespot-4438976369
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-nearmap-4379917109
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer in Cloud Team
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-in-cloud-team-at-cloudferro-s-a-4371293744
+----------------------------------------
+
+----------------------------------------
+Role: Software engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-bending-spoons-4442662838
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-circle-k-4417930844
+----------------------------------------
+
+----------------------------------------
+Role: Python Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/python-developer-at-algoteque-innovation-hub-4440398129
+----------------------------------------
+
+----------------------------------------
+Role: Python Developer (Mid)
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/python-developer-mid-at-jit-team-4405654618
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer, Mission Planning
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-mission-planning-at-waymo-4425271513
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer, Automation Platform & Workflows
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-automation-platform-workflows-at-waymo-4423267959
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer, Early Careers, PhD, gSoC Server Software
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-early-careers-phd-gsoc-server-software-at-google-4365575666
+----------------------------------------
+
+----------------------------------------
+Role: Fullstack Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/fullstack-software-engineer-at-island-4395254209
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-hbk-hottinger-br%C3%BCel-kj%C3%A6r-4444477450
+----------------------------------------
+
+----------------------------------------
+Role: Quant Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/quant-developer-at-stratslab-4339068189
+----------------------------------------
+
+----------------------------------------
+Role: Back End Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/back-end-developer-at-jst-digital-4436503839
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-airhelp-4431663052
+----------------------------------------
+
+----------------------------------------
+Role: Data Acquisition Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/data-acquisition-engineer-at-opensignal-4425948281
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-moderna-4404484346
+----------------------------------------
+
+----------------------------------------
+Role: Software Development Eng.
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-development-eng-at-amd-4421188273
+----------------------------------------
+
+----------------------------------------
+Role: Scala Backend Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/scala-backend-developer-at-beyond-tabs-com-4443397880
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-at-biospace-4444067955
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer - QuantumBlack, AI by McKinsey
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-quantumblack-ai-by-mckinsey-at-quantumblack-ai-by-mckinsey-4436437482
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer - Data
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-data-at-point72-4435157477
+----------------------------------------
+
+----------------------------------------
+Role: Python Developer
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/python-developer-at-integral-solutions-data-ai-4342540669
+----------------------------------------
+
+----------------------------------------
+Role: Software Engineer Poland
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/software-engineer-poland-at-amp-4327625692
+----------------------------------------
+
+----------------------------------------
+Role: Fullstack Developer | Assurance | Poland
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/fullstack-developer-assurance-poland-at-deloitte-4421941689
+----------------------------------------
+
+----------------------------------------
+Role: Backend Engineer, Food Planning (all genders)
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/backend-engineer-food-planning-all-genders-at-hellofresh-4429299318
+----------------------------------------
+
+----------------------------------------
+Role: Programistka/Programista SAS
+Company: See Job Link
+Match Score: %80
+URL: https://pl.linkedin.com/jobs/view/programistka-programista-sas-at-pko-bank-polski-4427708417
+----------------------------------------
+
+----------------------------------------
+Role: GCP Auditor: Remote & Global Compliance Expert
+Company: See Job Link
+Match Score: %80
+URL: https://www.jobleads.com/pl/job/gcp-auditor-remote-global-compliance-expert--warszawa--eb1f6cf566f20c080d63e47ff47c6daa1
+----------------------------------------
+
+----------------------------------------
+Role: Ekspert ds. Compliance Bancassurance
+Company: See Job Link
+Match Score: %80
+URL: https://www.jobleads.com/pl/job/ekspert-ds-compliance-bancassurance--warszawa--ef0a493993068b7009c2daace73bb7e8a
+----------------------------------------
+
+----------------------------------------
+Role: CRA Compliance Engineer (f/m/x)
+Company: See Job Link
+Match Score: %80
+URL: https://www.jobleads.com/pl/job/cra-compliance-engineer-f-m-x--warszawa--e78f98da3a6ac9826ae837c28eacdbc98
+----------------------------------------
+
+----------------------------------------
+Role: Senior Compliance Consultant – Poland & Central Europe
+Company: See Job Link
+Match Score: %85
+URL: https://www.jobleads.com/pl/job/senior-compliance-consultant-poland-central-europe--warszawa--e54561d89fd93a380f166ef9394bbd72d
+----------------------------------------
+
+----------------------------------------
+Role: KYC & Compliance Officer
+Company: See Job Link
+Match Score: %80
+URL: https://www.jobleads.com/pl/job/kyc-compliance-officer--warszawa--e52e2cfc0f318bdab4d9e4523654a326a
+----------------------------------------
+
+----------------------------------------
+Role: Senior KYC & Compliance Lead for iGaming Risk
+Company: See Job Link
+Match Score: %85
+URL: https://www.jobleads.com/pl/job/senior-kyc-compliance-lead-for-igaming-risk--warszawa--ea8db03cd63ab1403f7b0f0836275b255
+----------------------------------------
+
+----------------------------------------
+Role: Compliance Specialist within Deep Dives & Diagnostics (Replacement contract)
+Company: See Job Link
+Match Score: %85
+URL: https://www.jobleads.com/pl/job/compliance-specialist-within-deep-dives-diagnostics-replacement-contract--warszawa--e22615ff2109b863fe5616afbf9a332ab
+----------------------------------------
+
+----------------------------------------
+Role: python developer internal compliance applications
+Company: See Job Link
+Match Score: %90
+URL: https://www.jobleads.com/pl/job/python-developer-internal-compliance-applications--warszawa--ed73bff58dd738ed833dfd629af3278a3
+----------------------------------------
+
+----------------------------------------
+Role: Starsza Konsultantka / Starszy Konsultant Podatkowy ds. VAT Compliance
+Company: See Job Link
+Match Score: %80
+URL: https://www.jobleads.com/pl/job/starsza-konsultantka-starszy-konsultant-podatkowy-ds-vat-compliance--warszawa--ea939f9ee386a4ccea3cbdbfcc942b29b
+----------------------------------------
+
+----------------------------------------
+Role: Senior Growth Analyst - Calendars
+Company: Readdle
+Match Score: %95
+URL: https://www.linkedin.com/jobs/view/4469239224
+----------------------------------------
+
+----------------------------------------
+Role: Data Analyst (R-19796)
+Company: Dun & Bradstreet Europe
+Match Score: %98
+URL: https://www.linkedin.com/jobs/view/4464797270
+----------------------------------------
+
+----------------------------------------
+Role: Banking IT Systems Business Analyst - Cards
+Company: Accenture Poland
+Match Score: %95
+URL: https://www.linkedin.com/jobs/view/4390916460
+----------------------------------------
+
+----------------------------------------
+Role: M&A Analyst (m/f/d)
+Company: Sancovia Corporate Finance
+Match Score: %85
+URL: https://www.linkedin.com/jobs/view/4464786033
+----------------------------------------
+
+----------------------------------------
+Role: Junior SOC Security Analyst
+Company: Bunge
+Match Score: %85
+URL: https://www.linkedin.com/jobs/view/4458764457
+----------------------------------------
+
+----------------------------------------
+Role: Operations Risk Review Analyst
+Company: U.S. Bank
+Match Score: %98
+URL: https://www.linkedin.com/jobs/view/4468345230
+----------------------------------------
+
+----------------------------------------
+Role: Senior Business Analyst (Marketing)
+Company: Huuuge Games
+Match Score: %95
+URL: https://www.linkedin.com/jobs/view/4467975054
+----------------------------------------
+
+----------------------------------------
+Role: Commercial Finance Analyst
+Company: Coca-Cola HBC
+Match Score: %85
+URL: https://www.linkedin.com/jobs/view/4468639645
+----------------------------------------
+
+----------------------------------------
+Role: Corporate Action Analyst
+Company: Citi
+Match Score: %85
+URL: https://www.linkedin.com/jobs/view/4467870721
+----------------------------------------
+
+----------------------------------------
+Role: Junior Data Quality Analyst (M/F/D)
+Company: DSV - Global Transport and Logistics
+Match Score: %85
+URL: https://www.linkedin.com/jobs/view/4447157144
+----------------------------------------
+
+----------------------------------------
+Role: Security Analyst, SOC - Global Threat Operations
+Company: LevelBlue
+Match Score: %85
+URL: https://www.linkedin.com/jobs/view/4466651520
+----------------------------------------
