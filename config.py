@@ -6,9 +6,9 @@ load_dotenv()
 # ==========================================
 # 🔑 API & TELEGRAM CREDENTIALS
 # ==========================================
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "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")
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8711747765:AAFLXOKABz7ri6Zot3rJXqHQEaO0AThdjrE")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "1421665735")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 # ==========================================
 # ⚙️ FILTERING & PIPELINE PARAMETERS
