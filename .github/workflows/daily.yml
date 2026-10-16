@@ -26,5 +26,10 @@ jobs:
       - name: Install Playwright Browsers
         run: python -m playwright install --with-deps chromium
 
-      - name: Run script
+      - name: Run Script
+        # GitHub Secrets'taki değerleri Python'ın görebileceği Env ortamına aktarıyoruz
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python main.py
